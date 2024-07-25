@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{graphicx} %for inserting images
+\usepackage{tikz} %for creating diagrams
+
+\title{Dynamic Programming (DP)}
+\author{Ansari Abrar}
+\date{July 25, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction:}
+Dynamic Programming (DP) is a method used to solve complex problems by breaking them down into simpler subproblems. It solves each subproblem only once and stores the results to avoid redundant computations.
+
+DP focuses on two main principles:
+\begin{enumerate}
+    \item Avoiding redundant computations by following a specific pattern to reach the final result.
+    \item Discarding useless information.
+\end{enumerate}
+
+\section*{Process:}
+The process of DP can be visualized with the following steps:
+
+\begin{center}
+\begin{tikzpicture}
+    \node (identify) [rectangle, draw, text centered] {Identify subproblems};
+    \node (store) [rectangle, draw, right of=identify, node distance=3.5cm, text centered] {Store solutions};
+    \node (build) [rectangle, draw, right of=store, node distance=3cm, text centered] {Build up solutions};
+    \node (avoid) [rectangle, draw, right of=build, node distance=3.3cm, text centered] {Avoid redundancy};
+    \node (result) [rectangle, draw, right of=avoid, node distance=3.5cm, text centered] {Efficient result};
+    \draw[->] (identify) -- (store);
+    \draw[->] (store) -- (build);
+    \draw[->] (build) -- (avoid);
+    \draw[->] (avoid) -- (result);
+\end{tikzpicture}
+\end{center}
+\section*{Approaches:}
+\begin{enumerate}
+    \item \textbf{Top-Down Approach (Memoization):} Here, we start with the final solution and recursively break it down into smaller subproblems. To avoid redundant calculations, we store the results of solved subproblems in a memoization table.
+    \begin{itemize}
+        \item Suitable when the number of subproblems is large and many of them are reused.
+    \end{itemize}
+    \item \textbf{Bottom-Up Approach (Tabulation):} Here, we start with the smallest subproblems and gradually build up to the final solution. We store the results of solved subproblems in a table to avoid redundant calculations.
+    \begin{itemize}
+        \item Suitable when the number of subproblems is small and the optimal solution can be directly computed from the solutions to smaller subproblems.
+    \end{itemize}
+\end{enumerate}
+\newpage
+\section*{ Example: } 
+\textbf{ Factorial: }
+\textit{Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, …}
+\begin{itemize}
+    \item Subproblems: F(0), F(1), F(2), F(3), …
+    \item Store Solutions: Create a table to store the values of F(n) as they are calculated.
+    \item Build Up Solutions: For F(n), look up F(n-1) and F(n-2) in the table and add them.
+    \item Avoid Redundancy: The table ensures that each subproblem (e.g., F(2)) is solved only once.
+\end{itemize}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{nthfibonacciseriesdynamicprogramming.png}
+    \caption{Fibonacci Number tree(Credit: GFG)}
+    \label{fig:1}
+\end{figure}
+Yes, it's recursion but shorter and more efficient as the program doesn't re-calculate the existing calculations again.
+In conclusion, we can efficiently calculate the Fibonacci sequence without having to recompute subproblems with DP. Here's the code using DP:
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{image.png}
+    \caption{Code for Fibonacci using DP in Java}
+    \label{fig:2}
+\end{figure}
+\end{document}
