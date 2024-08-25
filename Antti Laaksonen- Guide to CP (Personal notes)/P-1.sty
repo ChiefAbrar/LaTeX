@@ -1,0 +1,179 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codeblue}{rgb}{0.25,0.5,0.75}
+
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{codeblue}\bfseries,
+    commentstyle=\color{codegray}\itshape,
+    breaklines=true,
+}
+
+\title{C++ Competitive Programming Note(P-1)}
+\author{Ansari Abrar}
+\date{August 25, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{Input and Output Efficiency}
+
+Input and output operations can often be a bottleneck in a program. To make them more efficient, add the following lines at the beginning of your code:
+
+\begin{lstlisting}
+ios::sync_with_stdio(0);
+cin.tie(0);
+\end{lstlisting}
+
+Using \textbackslash n is faster than using \texttt{endl} because \texttt{endl} causes a flush operation.
+
+The C functions \texttt{scanf} and \texttt{printf} are faster alternatives to C++ standard streams but are more difficult to use.
+
+\section*{Reading Whole Lines}
+
+To read an entire input line, possibly containing spaces, use the \texttt{getline} function:
+
+\begin{lstlisting}
+string s;
+getline(cin, s);
+\end{lstlisting}
+
+If the amount of data is unknown, the following loop is useful:
+
+\begin{lstlisting}
+while(cin >> x) {
+    // code
+}
+\end{lstlisting}
+
+\section*{File Input/Output}
+
+In some contest systems, files are used for input and output. An easy solution is to add the following lines at the beginning of the code:
+
+\begin{lstlisting}
+freopen("input.txt", "r", stdin);
+freopen("output.txt", "w", stdout);
+\end{lstlisting}
+
+This way, the program reads input from \texttt{input.txt} and writes output to \texttt{output.txt}.
+
+\section*{C++ Code Template}
+
+A typical C++ code template for competitive programming looks like this:
+
+\begin{lstlisting}
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    // solution comes here
+}
+\end{lstlisting}
+
+For taking input:
+
+\begin{lstlisting}
+int a, b;
+string x;
+cin >> a >> b >> x;
+\end{lstlisting}
+
+For showing output:
+
+\begin{lstlisting}
+int a = 123, b = 456;
+string x = "monkey";
+cout << a << " " << b << " " << x << "\n";
+\end{lstlisting}
+
+\section*{Using \texttt{typedef}}
+
+The \texttt{typedef} keyword can be used to give a short name to a data type. For example:
+
+\begin{lstlisting}
+typedef long long ll;
+\end{lstlisting}
+
+This way, instead of writing \texttt{long long} frequently, you can use the shorter \texttt{ll}.
+
+Comparison:
+
+\begin{lstlisting}
+long long a = 123456789;
+long long b = 987654321;
+cout << a*b << "\n";
+\end{lstlisting}
+
+and
+
+\begin{lstlisting}
+typedef long long ll;
+ll a = 123456789;
+ll b = 987654321;
+cout << a*b << "\n";
+\end{lstlisting}
+
+Both are the same!
+
+\begin{lstlisting}
+typedef vector<int> vi; // vector of integers
+typedef pair<int,int> pi; // pair of integers
+\end{lstlisting}
+
+Here, we don't need to repeatedly type vector\textless int\textgreater; rather we can type vi and store integers.
+
+\section*{Macros}
+
+Macros can be used to shorten code. A macro specifies that certain strings in the code will be changed before the compilation. They are defined using the \texttt{\#define} keyword.
+
+\begin{lstlisting}
+#define F first
+#define S second
+#define PB push_back
+#define MP make_pair
+\end{lstlisting}
+
+For example, this code:
+
+\begin{lstlisting}
+v.push_back(make_pair(y1,x1));
+v.push_back(make_pair(y2,x2));
+int d = v[i].first+v[i].second;
+\end{lstlisting}
+
+can be shortened to:
+
+\begin{lstlisting}
+v.PB(MP(y1,x1));
+v.PB(MP(y2,x2));
+int d = v[i].F+v[i].S;
+\end{lstlisting}
+
+Another example:
+
+\begin{lstlisting}
+#define REP(i,a,b) for(int i=a; i<=b; i++)
+\end{lstlisting}
+
+This loop:
+
+\begin{lstlisting}
+for (int i = 1; i <= n; i++) {
+    search(i);
+}
+\end{lstlisting}
+
+can be shortened to:
+
+\begin{lstlisting}
+REP(i,1,n) {
+    search(i);
+}
+\end{lstlisting}
+
+\end{document}
