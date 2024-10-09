@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage{enumitem}
+\title{The Sleuth Kit (TSK)}
+\author{Abrar}
+\date{October 0, 2024}
+\begin{document}
+\maketitle
+The Sleuth Kit (TSK) is a collection of command-line tools used for digital forensics to analyze disk images and recover files and data from various file systems. It supports file systems like FAT, NTFS, EXT, HFS+, UFS, and more.
+\section*{Key TSK Tools and Usage}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{mmls (Media Management List):}
+    \begin{itemize}
+        \item \textbf{Purpose:} Lists the partition layout of a disk or disk image.
+        \item \textbf{Usage:} \texttt{mmls <disk-image>}
+        \item \textbf{Example:} \texttt{mmls disk.img}
+        \item Outputs start/end sectors, partition types, and sizes.
+    \end{itemize}
+    \item \textbf{fls (File List):}
+    \begin{itemize}
+        \item \textbf{Purpose:} Lists files and directories in a file system, including deleted files.
+        \item \textbf{Usage:} \texttt{fls [options] <image> [inode]}
+        \item \textbf{Example:} \texttt{fls -r disk.img}
+        \item \textbf{Options:} 
+        \begin{itemize}
+            \item \texttt{-r}: Recursively lists directories and files.
+        \end{itemize}
+        Lists all files and directories, along with inode numbers.
+    \end{itemize}
+    \item \textbf{icat (Inode Cat):}
+    \begin{itemize}
+        \item \textbf{Purpose:} Extracts file content using its inode number.
+        \item \textbf{Usage:} \texttt{icat <image> -o <offset> <inode>}
+        \item \textbf{Example:} \texttt{icat disk.img -o 360448 2371}
+        \item \textbf{Options:} 
+        \begin{itemize}
+            \item \texttt{-o}: Offset of the partition (where the file system starts).
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{istat (Inode Stat):}
+    \begin{itemize}
+        \item \textbf{Purpose:} Displays detailed information about a specific inode, including file metadata.
+        \item \textbf{Usage:} \texttt{istat <image> <inode>}
+        \item \textbf{Example:} \texttt{istat disk.img 2371}
+        \item Outputs file metadata for the inode 2371 (file size, permissions, timestamps, etc.).
+    \end{itemize}
+    \item \textbf{fsstat (File System Stat):}
+    \begin{itemize}
+        \item \textbf{Purpose:} Displays details about the file system (e.g., type, layout, metadata locations).
+        \item \textbf{Usage:} \texttt{fsstat <image>}
+        \item \textbf{Example:} \texttt{fsstat disk.img}
+        \item Displays information like block sizes, superblock info, and file system layout.
+    \end{itemize}
+    \item \textbf{tsk\_recover (File Recovery):}
+    \begin{itemize}
+        \item \textbf{Purpose:} Recovers all files from a partition, including deleted files.
+        \item \textbf{Usage:} \texttt{tsk\_recover <image> <output-directory>}
+        \item \textbf{Example:} \texttt{tsk\_recover disk.img /output/recovered\_files/}
+        \item Recovers files from \texttt{disk.img} to the specified directory.
+    \end{itemize}
+    \item \textbf{blkls (Block List):}
+    \begin{itemize}
+        \item \textbf{Purpose:} Extracts all unallocated (deleted) blocks from a file system.
+        \item \textbf{Usage:} \texttt{blkls <image>}
+        \item \textbf{Example:} \texttt{blkls disk.img}
+        \item Extracts unallocated blocks from the disk image.
+    \end{itemize}
+\end{enumerate}
+\end{document}
